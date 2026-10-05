@@ -32,3 +32,13 @@
     PYTHONPATH=src python3 -m creative_program_foundation.api --database creative_program.sqlite3 --host 127.0.0.1 --port 8080
 
 健康检查使用 GET /health。写入接口通过 X-Actor-Id 标识操作者，服务重启后 SQLite 中的业务状态和审计历史继续保留。
+
+## 巡展与渠道调度服务（exhibition_tour）
+
+`src/exhibition_tour/` 是建在上述基础边界上的领域服务，负责获奖作品巡展的限时草案占用、
+场馆/承运/保险/作品代表按职责确认、并发唯一发布、只重排受影响区段、交接与费用保护、
+备用资源稳定优先级、观众场次影响追溯与历史时点责任链还原。详见
+`src/exhibition_tour/README.md`。
+
+    PYTHONPATH=src python3 -m exhibition_tour.acceptance
+    PYTHONPATH=src python3 -m exhibition_tour.api --database tour.sqlite3 --port 8090
